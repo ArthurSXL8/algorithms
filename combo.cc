@@ -58,6 +58,10 @@ int main(int argc, char** argv) {
 //  std::cout << "max3: " << max3 << ", min3: " << min3 << std::endl;
   int result = m[max1 - min1]*m[max2-min2]*m[max3-min3];
   std::ofstream out("combo.out");
+  if (N > 6) {
   out << 250-result << std::endl;
+  } else {
+    out << N*N*N << std::endl;
+  }
 
 }
