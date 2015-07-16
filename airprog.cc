@@ -35,38 +35,39 @@ int main(int argc, char** argv) {
     }
   }
   for (set<int>::iterator i = container.begin(); i != container.end(); ++i) {
-//    std::cout << "===> " << *i << std::endl;
+    std::cout << "===> " << *i << std::endl;
   }
-  std::cout << "limit: " << limit << ", " << "div: " << div << std::endl;
-  std::map<int, set<int> > result;
+//  std::cout << "limit: " << limit << ", " << "div: " << div << std::endl;
+  std::multimap<int, int> result;
   for (int i=0;i<=limit; ++i) {
     //std::cout << "i: " << i << std::endl;
     int step = 0;
     //std::cout << "div: " << div << std::endl;
     for (int j=1;j<=div; ++j) {
-      std::cout << "j: " << j << std::endl;
+  //    std::cout << "j: " << j << std::endl;
       if (step == length) {
-        result[j].insert(i);
+        result.insert(make_pair(j, i));
+        step = 0;
         continue;
       }
       if (i == 1 && step == 4) {
       //  std::cout << "n: " << i + j*step << std::endl;
       } else {
         //std::cout << i << "," << step << std::endl;
-      } 
+      }
+     
       if (container.find(i+ j*step) == container.end()) {
+        step = 0;
         continue;
       } 
       step++;
     }
 
   }
-  std::cout << "size: " << result.size() << std::endl;
-  for (std::map<int, set<int> >::iterator it = result.begin();
+ // std::cout << "size: " << result.size() << std::endl;
+  for (std::multimap<int, int>::iterator it = result.begin();
        it != result.end(); ++it) {
-    for (set<int>::iterator iter = it->second.begin(); iter != it->second.end(); ++iter) {
-      std::cout << "gongcha: " << it->first << ", first:" << *iter << std::endl;
-    }
+      std::cout << "b: " << it->first << ", a:" << it->second << std::endl;
   }
 
   return 0;
