@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
     for (int j=1;j<=div; ++j) {
   //    std::cout << "j: " << j << std::endl;
       if (step == length) {
-        result.insert(make_pair(j, i));
+        //result.insert(make_pair(j, i));
         step = 0;
         continue;
       }
@@ -56,13 +56,16 @@ int main(int argc, char** argv) {
         //std::cout << i << "," << step << std::endl;
       }
      
-      if (container.find(i+ j*step) == container.end()) {
-        step = 0;
-        continue;
-      } 
-      step++;
+      if (container.find(i+ j*step) != container.end()) {
+        if (step == length -1) {
+          result.insert(make_pair(j, i));
+          step = 0;
+          continue;
+        } else {
+          step++;
+        }
+      }
     }
-
   }
  // std::cout << "size: " << result.size() << std::endl;
   for (std::multimap<int, int>::iterator it = result.begin();
