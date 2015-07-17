@@ -1,6 +1,6 @@
 /*
 ID: johnhom2
-PROG: airprog
+PROG: ariprog
 LANG: C++
 */
 #include <fstream>
