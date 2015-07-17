@@ -49,8 +49,12 @@ int main(int argc, char** argv) {
     }
   }
   ofstream out("ariprog.out");
+  if (!result.empty()) {
   for (std::multimap<int, int>::iterator j = result.begin(); j != result.end(); ++j) {
     out << j->second << " "<< j->first << std::endl;
+  }
+  } else {
+    out << "NONE" << std::endl;
   }
 
   return 0;
