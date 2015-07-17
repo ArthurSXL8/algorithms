@@ -19,7 +19,7 @@ bool test(std::set<int> container, int begin, int length, int div) {
   return true;
 }
 int main(int argc, char** argv) {
-  std::ifstream in("airprog.in");
+  std::ifstream in("ariprog.in");
   std::string line;
   getline(in, line);
   std::stringstream ss;
@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
       }
     }
   }
-  ofstream out("airprog.out");
+  ofstream out("ariprog.out");
   for (std::multimap<int, int>::iterator j = result.begin(); j != result.end(); ++j) {
     out << j->second << " "<< j->first << std::endl;
   }
