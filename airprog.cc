@@ -43,6 +43,9 @@ int main(int argc, char** argv) {
   std::multimap<int, int> result;
   for (int i=0; i<=limit; ++i) {
     for (int j=1; j<=div; ++j) {
+      if (i + j* (length-1) > limit) {
+        break;
+      }
       if (test(container, i, length, j)) {
         result.insert(make_pair(j, i));
       }
