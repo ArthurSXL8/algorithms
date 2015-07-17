@@ -26,14 +26,12 @@ int main(int argc, char** argv) {
   ss << line;
   int length;
   ss >> length;
-  std::cout << "length: " << length << std::endl;
   int max;
   ss.str("");
   ss.clear();
   getline(in, line);
   ss << line;
   ss >> max;
-  std::cout << "max: " << max << std::endl;
   int limit = max*max*2;
   std::set<int> container;
   int div = limit/(length-1);
