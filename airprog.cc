@@ -1,6 +1,6 @@
 /*
 ID: johnhom2
-PROG: airprog
+PROG: ariprog
 LANG: C++
 */
 #include <fstream>
@@ -10,22 +10,28 @@ LANG: C++
 #include <sstream>
 #include <string>
 using namespace std;
+bool test(std::set<int> container, int begin, int length, int div) {
+  for (int i=0; i<length; ++i) {
+    if (container.find(begin + i* div) == container.end()) {
+      return false;
+    }
+  }
+  return true;
+}
 int main(int argc, char** argv) {
-  std::ifstream in("airprog.in");
+  std::ifstream in("ariprog.in");
   std::string line;
   getline(in, line);
   std::stringstream ss;
   ss << line;
   int length;
   ss >> length;
-  std::cout << "length: " << length << std::endl;
   int max;
   ss.str("");
   ss.clear();
   getline(in, line);
   ss << line;
   ss >> max;
-  std::cout << "max: " << max << std::endl;
   int limit = max*max*2;
   std::set<int> container;
   int div = limit/(length-1);
@@ -34,49 +40,26 @@ int main(int argc, char** argv) {
       container.insert(i*i + j*j);
     }
   }
-  for (set<int>::iterator i = container.begin(); i != container.end(); ++i) {
-    std::cout << "===> " << *i << std::endl;
-  }
-//  std::cout << "limit: " << limit << ", " << "div: " << div << std::endl;
   std::multimap<int, int> result;
-  for (int i=0;i<=limit; ++i) {
-    //std::cout << "i: " << i << std::endl;
-    int step = 0;
-    //std::cout << "div: " << div << std::endl;
-    for (int j=1;j<=div; ++j) {
-  //    std::cout << "j: " << j << std::endl;
-      if (step == length) {
-        //result.insert(make_pair(j, i));
-        step = 0;
-        continue;
+  for (int i=0; i<=limit; ++i) {
+    for (int j=1; j<=div; ++j) {
+      if (i + j* (length-1) > limit) {
+        break;
       }
-      if (i == 1 && step == 4) {
-      //  std::cout << "n: " << i + j*step << std::endl;
-      } else {
-        //std::cout << i << "," << step << std::endl;
-      }
-     
-      if (container.find(i+ j*step) != container.end()) {
-        if (step == length -1) {
-          result.insert(make_pair(j, i));
-          step = 0;
-          continue;
-        } else {
-          step++;
-        }
+      if (test(container, i, length, j)) {
+        result.insert(make_pair(j, i));
       }
     }
   }
- // std::cout << "size: " << result.size() << std::endl;
-  for (std::multimap<int, int>::iterator it = result.begin();
-       it != result.end(); ++it) {
-      std::cout << "b: " << it->first << ", a:" << it->second << std::endl;
+  ofstream out("ariprog.out");
+  if (!result.empty()) {
+  for (std::multimap<int, int>::iterator j = result.begin(); j != result.end(); ++j) {
+    out << j->second << " "<< j->first << std::endl;
+  }
+  } else {
+    out << "NONE" << std::endl;
   }
 
   return 0;
-
-
-
-
   
 }
